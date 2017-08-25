@@ -40,4 +40,4 @@ resource "aws_db_instance" "default" {
 output "server_address" { value = "${module.server.server_address}" }
 output "public_ip" { value = "${module.server.public_ip}" }
 output "instance_name" { value = "${module.server.name}" }
-output "db_endpoint" { value = ${resource.aws_db_instance.endpoint} }
+output "db_endpoint" { value = "${resource.aws_db_instance.endpoint}" }
