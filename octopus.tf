@@ -1,6 +1,6 @@
 terraform {
   backend "atlas" {
-    name    = "umgdevops/seansandbox"
+    name    = "umgdevops/octopus-server-uat"
     address = "https://atlas.hashicorp.com"
   }
 }
