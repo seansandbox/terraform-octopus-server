@@ -31,7 +31,7 @@ resource "aws_db_instance" "default" {
   engine               = "sqlserver-ex"
   engine_version       = "13.00.4422.0.v1"
   instance_class       = "db.t2.micro"
-  name                 = "${var.octopus_db_name}"
+  identifier           = "${var.octopus_db_name}"
   username             = "${var.octopus_db_username}"
   password             = "${var.octopus_db_password}"
   db_subnet_group_name = "default"
