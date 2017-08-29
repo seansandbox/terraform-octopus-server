@@ -22,6 +22,7 @@ module "server" {
     chef_user_key = "${var.chef_user_key}"
     chef_run_list = "${var.chef_run_list}"
     admin_password = "${var.admin_password}"
+    server_instance_sg_name = "${var.octopus_server_instance_sg_name}"
 }
 
 resource "aws_db_instance" "default" {

@@ -14,3 +14,4 @@ variable "admin_password" {}
 variable "octopus_db_name" {}
 variable "octopus_db_username" {}
 variable "octopus_db_password" {}
+variable "octopus_server_instance_sg_name" {}
