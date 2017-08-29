@@ -28,7 +28,7 @@ resource "aws_db_instance" "default" {
   allocated_storage    = 20
   storage_type         = "gp2"
   engine               = "sqlserver-ex"
-  engine_version       = "13.00.442"
+  engine_version       = "13.00.4422.0.v1"
   instance_class       = "db.t2.micro"
   name                 = "${var.octopus_db_name}"
   username             = "${var.octopus_db_username}"
