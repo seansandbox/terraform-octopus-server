@@ -23,10 +23,10 @@ module "server" {
     chef_run_list = "${var.chef_run_list}"
     admin_password = "${var.admin_password}"
     server_instance_sg_name = "${var.octopus_server_instance_sg_name}"
-    instance_remote_data = "${aws_db_instance.default.endpoint};${var.octopus_db_username};${var.octopus_db_password}"
+    instance_remote_data = "${aws_db_instance.octopus_rds_instance.endpoint};${var.octopus_db_username};${var.octopus_db_password}"
 }
 
-resource "aws_db_instance" "default" {
+resource "aws_db_instance" "octopus_rds_instance" {
   allocated_storage         = 20
   storage_type              = "gp2"
   engine                    = "sqlserver-ex"
@@ -72,4 +72,4 @@ resource "aws_security_group" "octopus_rds_sg" {
 output "server_address" { value = "${module.server.server_address}" }
 output "public_ip" { value = "${module.server.public_ip}" }
 output "instance_name" { value = "${module.server.name}" }
-output "db_endpoint" { value = "${aws_db_instance.default.endpoint}" }
+output "db_endpoint" { value = "${aws_db_instance.octopus_rds_instance.endpoint}" }
