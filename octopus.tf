@@ -31,7 +31,7 @@ resource "aws_db_instance" "default" {
   storage_type              = "gp2"
   engine                    = "sqlserver-ex"
   engine_version            = "13.00.4422.0.v1"
-  instance_class            = "db.t2.micro"
+  instance_class            = "${var.octopus_rds_instance_size}"
   identifier                = "${var.octopus_db_name}"
   username                  = "${var.octopus_db_username}"
   password                  = "${var.octopus_db_password}"
@@ -40,6 +40,33 @@ resource "aws_db_instance" "default" {
   skip_final_snapshot       = "${var.octopus_skip_final_snapshot}"
   final_snapshot_identifier = "${var.octopus_final_snapshot_identifier}"
   publicly_accessible       = "true"
+  vpc_security_group_ids    = ["${aws_security_group.octopus_rds_sg.id}"]
+}
+
+resource "aws_security_group" "octopus_rds_sg" {
+  name        = "${var.octopus_db_name}SG"
+  description = "Provisioned by terraform"
+  vpc_id      = "${var.vpc_id}"
+
+  tags {
+    Name = "${var.octopus_db_name}SG"
+  }
+
+  # MSSQL access from anywhere
+  ingress {
+    from_port   = 1433
+    to_port     = 1433
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  # outbound internet access
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 }
 
 output "server_address" { value = "${module.server.server_address}" }

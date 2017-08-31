@@ -17,3 +17,4 @@ variable "octopus_db_password" {}
 variable "octopus_server_instance_sg_name" {}
 variable "octopus_skip_final_snapshot" {}
 variable "octopus_final_snapshot_identifier" {}
+variable "octopus_rds_instance_size" {}
