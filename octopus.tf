@@ -23,20 +23,22 @@ module "server" {
     chef_run_list = "${var.chef_run_list}"
     admin_password = "${var.admin_password}"
     server_instance_sg_name = "${var.octopus_server_instance_sg_name}"
-    instance_remote_data = "${aws_db_instance.default.endpoint}"
+    instance_remote_data = "${aws_db_instance.default.endpoint};${var.octopus_db_username};${var.octopus_db_password}"
 }
 
 resource "aws_db_instance" "default" {
-  allocated_storage    = 20
-  storage_type         = "gp2"
-  engine               = "sqlserver-ex"
-  engine_version       = "13.00.4422.0.v1"
-  instance_class       = "db.t2.micro"
-  identifier           = "${var.octopus_db_name}"
-  username             = "${var.octopus_db_username}"
-  password             = "${var.octopus_db_password}"
-  db_subnet_group_name = "default"
-  parameter_group_name = "default.sqlserver-ex-13.0"
+  allocated_storage         = 20
+  storage_type              = "gp2"
+  engine                    = "sqlserver-ex"
+  engine_version            = "13.00.4422.0.v1"
+  instance_class            = "db.t2.micro"
+  identifier                = "${var.octopus_db_name}"
+  username                  = "${var.octopus_db_username}"
+  password                  = "${var.octopus_db_password}"
+  db_subnet_group_name      = "default"
+  parameter_group_name      = "default.sqlserver-ex-13.0"
+  skip_final_snapshot       = "${var.octopus_skip_final_snapshot}"
+  final_snapshot_identifier = "${var.octopus_final_snapshot_identifier}"
 }
 
 output "server_address" { value = "${module.server.server_address}" }
