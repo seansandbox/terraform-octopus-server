@@ -39,6 +39,7 @@ resource "aws_db_instance" "default" {
   parameter_group_name      = "default.sqlserver-ex-13.0"
   skip_final_snapshot       = "${var.octopus_skip_final_snapshot}"
   final_snapshot_identifier = "${var.octopus_final_snapshot_identifier}"
+  publicly_accessible       = "true"
 }
 
 output "server_address" { value = "${module.server.server_address}" }
